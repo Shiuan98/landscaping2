@@ -1,0 +1,31 @@
+<IfModule mod_rewrite.c>
+
+RewriteEngine On
+#RewriteCond %{HTTPS} off
+#RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+#RewriteCond %{HTTP_HOST} !^www\.
+#RewriteRule .* https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+DirectoryIndex index.php index.html
+RewriteBase /landscaping/
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php
+
+
+
+RewriteCond %{THE_REQUEST} \ /+([^\?]+)\.php\?pid=([0-9]+)
+RewriteRule ^ /%1/%2? [L,R]
+
+RewriteCond %{THE_REQUEST} \ /+([^\?]+)\.php(\ |$)
+RewriteRule ^ /%1 [L,R]
+RewriteRule ^location/?$ location.php [NC,L]
+RewriteRule ^gardener-service-([a-zA-Z0-9_\-+!*']+)/?$    gardener-service.php?a=$1     [NC,L]
+RewriteRule ^garden-landscaping-service-([a-zA-Z0-9_\-+!*']+)/?$    garden-landscaping-service.php?a=$1    [NC,L]
+RewriteRule ^flower-planting-and-supply-([a-zA-Z0-9_\-+!*']+)/?$    flower-planting-and-supply.php?a=$1    [NC,L]
+RewriteRule ^garden-sculpture-and-pond-and-fountain-([a-zA-Z0-9_\-+!*']+)/?$    garden-sculpture-and-pond-and-fountain.php?a=$1    [NC,L]
+RewriteRule ^location-([a-zA-Z0-9_\-+!*']+)/?$    index.php?a=$1    [NC,L]
+
+
+
+
+</IfModule>
